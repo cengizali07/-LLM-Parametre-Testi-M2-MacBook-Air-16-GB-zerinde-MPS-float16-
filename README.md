@@ -9,7 +9,7 @@
 
 ---
 
-## 📊 Test Sonuçları
+ Test Sonuçları
 
 | Model Parametresi | Süre (s) | Durum   |
 |--------------------|---------|---------|
@@ -49,10 +49,13 @@ export PYTORCH_MPS_HIGH_WATERMARK_RATIO=0.0
 
 Uyarı: Bu ayar sistem dengesini bozabilir. Dikkatli kullanılmalıdır.
 
-🛠️ Kullanılan Araçlar
+Kullanılan Araçlar
 
-Python 3.13.5
-PyTorch (MPS backend aktif)
+ Python 3.13.5
+ PyTorch (MPS backend aktif)
+ Sistem: macOS-14.3.1-arm64-arm-64bit-Mach-O
+ PyTorch Sürüm: 2.7.1
+ MPS Kullanılabilir: True
 
 
 Bu testte gerçek bir dil modeli (LLM) yerine, torch.nn.Linear katmanlarından oluşan sentetik (dummy) bir model kullanılmıştır.
@@ -68,4 +71,22 @@ Farklı büyüklükteki (parametre sayısına göre) yapay modellerin
 Bellek kullanımı ve işleme süresini
 MPS (Metal Performance Shaders) backend ile ölçmeyi amaçlar.
 
+
+Kullanılan Araçlar
+
+ Python 3.13.5
+ PyTorch (MPS backend aktif)
+ Sistem: macOS-14.3.1-arm64-arm-64bit-Mach-O
+ PyTorch Sürüm: 2.7.1
+ MPS Kullanılabilir: True
+ 
+✅ 1000M parametre (float32) için test başarılı. Süre: 2.07s, Katman: 3807
+✅ 2000M parametre (float32) için test başarılı. Süre: 4.17s, Katman: 7614
+✅ 3000M parametre (float32) için test başarılı. Süre: 219.23s, Katman: 11421
+✅ 4000M parametre (float32) için test başarılı. Süre: 552.06s, Katman: 15229
+❌ 5000M parametre (float32) için test başarısız: MPS backend out of memory (MPS allocated: 18.13 GB, other allocations: 384.00 KB, max allowed: 18.13 GB). Tried to allocate 1024.00 KB on private pool. Use PYTORCH_MPS_HIGH_WATERMARK_RATIO=0.0 to disable upper limit for memory allocations (may cause system failure).
+❌ 6000M parametre (float32) için test başarısız: MPS backend out of memory (MPS allocated: 18.13 GB, other allocations: 384.00 KB, max allowed: 18.13 GB). Tried to allocate 1024.00 KB on private pool. Use PYTORCH_MPS_HIGH_WATERMARK_RATIO=0.0 to disable upper limit for memory allocations (may cause system failure).
+❌ 7000M parametre (float32) için test başarısız: MPS backend out of memory (MPS allocated: 18.13 GB, other allocations: 384.00 KB, max allowed: 18.13 GB). Tried to allocate 1024.00 KB on private pool. Use PYTORCH_MPS_HIGH_WATERMARK_RATIO=0.0 to disable upper limit for memory allocations (may cause system failure).
+❌ 8000M parametre (float32) için test başarısız: MPS backend out of memory (MPS allocated: 18.13 GB, other allocations: 384.00 KB, max allowed: 18.13 GB). Tried to allocate 1024.00 KB on private pool. Use PYTORCH_MPS_HIGH_WATERMARK_RATIO=0.0 to disable upper limit for memory allocations (may cause system failure).
+zsh: killed     python 32bitstress.py
 
